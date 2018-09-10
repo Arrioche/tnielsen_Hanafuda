@@ -8,7 +8,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import java.util.ArrayList;
 
 public final class MyTouchListener implements View.OnTouchListener {
     //the action that the class performs
