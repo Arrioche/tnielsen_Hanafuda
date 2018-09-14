@@ -17,8 +17,6 @@ public final class MyTouchListener implements View.OnTouchListener {
         //ACTION_DOWN means that someone just started touching it
         //so this if is checking if the square has been tapped
         if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-            //the layout that the image being touched is currently in
-            LinearLayout parent = (LinearLayout)view.getParent();
             //makes a clipData
             //since we are just using pictures there is no data
             //but there could be data

@@ -19,6 +19,10 @@ import java.util.Stack;
 public final class MyDragListener implements View.OnDragListener {
     private CharSequence clip;
     private static final String TAG = "MainActivity";
+    private LinearLayout tricks;
+    public void id(LinearLayout tag){
+        tricks = tag;
+    }
     @Override
     //when a drag is started this activates
     public boolean onDrag(View v, DragEvent event) {
@@ -52,11 +56,19 @@ public final class MyDragListener implements View.OnDragListener {
                 // Gets the text data from the item.
                 clip = item.getText();
                 clip=clip.toString();
-                // Dropped, reassign View to ViewGroup
                 View view = (View) event.getLocalState();
-                //what's a viewGroup?
-                //who knows?
-                //it's a layout thing
+
+                ViewGroup owner = (ViewGroup) view.getParent();
+                LinearLayout container = (LinearLayout)v.getParent();
+                //if you are not dropping in your own container
+                if(owner!=container) {
+                    owner.removeView(view);
+                    container.removeView(v);
+
+                    //add the view
+                    tricks.addView(view);
+                    tricks.addView(v);
+                }
                 break;
             case DragEvent.ACTION_DRAG_ENDED:
 
