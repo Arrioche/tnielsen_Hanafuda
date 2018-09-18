@@ -21,11 +21,11 @@ public final class MyDragListener implements View.OnDragListener {
     private static final String TAG = "MainActivity";
     private LinearLayout tricks;
     private LinearLayout deck;
-    private LinearLayout hand;
-    public void id(LinearLayout tag, LinearLayout tag2, LinearLayout tag3){
+    private TextView score;
+    public void id(LinearLayout tag, LinearLayout tag2, TextView tag3){
         tricks = tag;
         deck = tag2;
-        hand = tag3;
+        score = tag3;
     }
     @Override
     //when a drag is started this activates
@@ -55,6 +55,7 @@ public final class MyDragListener implements View.OnDragListener {
                 //change the look back
                 break;
             case DragEvent.ACTION_DROP:
+                int sco =Integer.parseInt(String.valueOf(score.getText()));
                 // Gets the item containing the dragged data
                 ClipData.Item item = event.getClipData().getItemAt(0);
                 // Gets the text data from the item.
@@ -73,7 +74,8 @@ public final class MyDragListener implements View.OnDragListener {
                 CharSequence dropID = dropper.getContentDescription();
                 Character dragMonth = dragID.charAt(0);
                 Character dropMonth = dropID.charAt(0);
-
+                int dragPoints = Integer.parseInt(String.valueOf(dragID.subSequence(1,3)));
+                int dropPoints = Integer.parseInt(String.valueOf(dragID.subSequence(1,3)));
 
                 //if you are not dropping in your own container
                 //and the suits are the same

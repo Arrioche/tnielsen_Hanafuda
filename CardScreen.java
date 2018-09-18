@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -18,7 +19,7 @@ public class CardScreen extends AppCompatActivity {
         //we definitely want to change the default contentView later
         setContentView(R.layout.activity_card_screen);
         //and the color
-        getWindow().getDecorView().setBackgroundColor(Color.BLACK);
+        getWindow().getDecorView().setBackgroundColor(Color.LTGRAY);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         //SO IT BEGINS
@@ -89,7 +90,7 @@ public class CardScreen extends AppCompatActivity {
 
         //initialize the drag listener
         MyDragListener card = new MyDragListener();
-        card.id((LinearLayout)findViewById(R.id.tricks),(LinearLayout)findViewById(R.id.board),(LinearLayout)findViewById(R.id.hand));
+        card.id((LinearLayout)findViewById(R.id.tricks),(LinearLayout)findViewById(R.id.board),(TextView) findViewById(R.id.score));
 
         //give all the cards touch listeners and drag listeners
         for (int i = 0; i < cards.size(); i++) {
