@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
@@ -19,8 +20,6 @@ public class CardScreen extends AppCompatActivity {
         //and the color
         getWindow().getDecorView().setBackgroundColor(Color.BLACK);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        //so it begins
-        MyTouchListener touch = new MyTouchListener();
 
         //SO IT BEGINS
         //pine
@@ -84,16 +83,23 @@ public class CardScreen extends AppCompatActivity {
         cards.add(findViewById(R.id.paulNormalThree));
         cards.add(findViewById(R.id.paulPhoenix));
 
-        MyDragListener deck = new MyDragListener();
-        deck.id((LinearLayout)findViewById(R.id.tricks));
-        //give all the cards touch listeners with two lines instead of 48
+        //initialize the touch listener
+        MyTouchListener touch = new MyTouchListener();
+        touch.id((LinearLayout)findViewById(R.id.hand));
+
+        //initialize the drag listener
+        MyDragListener card = new MyDragListener();
+        card.id((LinearLayout)findViewById(R.id.tricks),(LinearLayout)findViewById(R.id.board),(LinearLayout)findViewById(R.id.hand));
+
+        //give all the cards touch listeners and drag listeners
         for (int i = 0; i < cards.size(); i++) {
             cards.get(i).setOnTouchListener(touch);
-            cards.get(i).setOnDragListener(deck);
+            cards.get(i).setOnDragListener(card);
         }
-
-        MyDragListener hand = new MyDragListener();
-        hand.id((LinearLayout)findViewById(R.id.tricks));
-        findViewById(R.id.hand).setOnDragListener(hand);
+        //make the draw button
+        Button draw = findViewById(R.id.draw);
+        MyClickListener drawButton = new MyClickListener();
+        drawButton.id((LinearLayout)findViewById(R.id.board),(LinearLayout)findViewById(R.id.hand));
+        draw.setOnClickListener(drawButton);
     }
 }

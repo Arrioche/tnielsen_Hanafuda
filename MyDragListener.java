@@ -20,12 +20,16 @@ public final class MyDragListener implements View.OnDragListener {
     private CharSequence clip;
     private static final String TAG = "MainActivity";
     private LinearLayout tricks;
-    public void id(LinearLayout tag){
+    private LinearLayout deck;
+    private LinearLayout hand;
+    public void id(LinearLayout tag, LinearLayout tag2, LinearLayout tag3){
         tricks = tag;
+        deck = tag2;
+        hand = tag3;
     }
     @Override
     //when a drag is started this activates
-    public boolean onDrag(View v, DragEvent event) {
+    public boolean onDrag(View dropper, DragEvent event) {
         //calls getAction on the drag event
         //which tells you if it has:
             /*started
@@ -56,18 +60,30 @@ public final class MyDragListener implements View.OnDragListener {
                 // Gets the text data from the item.
                 clip = item.getText();
                 clip=clip.toString();
-                View view = (View) event.getLocalState();
+                View dragger = (View) event.getLocalState();
+                //get the layouts that each card comes from
+                ViewGroup owner = (ViewGroup) dragger.getParent();
+                LinearLayout container = (LinearLayout)dropper.getParent();
 
-                ViewGroup owner = (ViewGroup) view.getParent();
-                LinearLayout container = (LinearLayout)v.getParent();
+                //get the ids of each card
+                //which are hacked around via the ContentView
+                //in a move that I am sure is programming crime
+                //but it worked fine for solitaire, so
+                CharSequence dragID = dragger.getContentDescription();
+                CharSequence dropID = dropper.getContentDescription();
+                Character dragMonth = dragID.charAt(0);
+                Character dropMonth = dropID.charAt(0);
+
+
                 //if you are not dropping in your own container
-                if(owner!=container) {
-                    owner.removeView(view);
-                    container.removeView(v);
+                //and the suits are the same
+                if(container==deck&&dropMonth==dragMonth) {
+                    owner.removeView(dragger);
+                    container.removeView(dropper);
 
                     //add the view
-                    tricks.addView(view);
-                    tricks.addView(v);
+                    tricks.addView(dragger);
+                    tricks.addView(dropper);
                 }
                 break;
             case DragEvent.ACTION_DRAG_ENDED:
