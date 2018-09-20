@@ -100,7 +100,7 @@ public class CardScreen extends AppCompatActivity {
         //make the draw button
         Button draw = findViewById(R.id.draw);
         MyClickListener drawButton = new MyClickListener();
-        drawButton.id((LinearLayout)findViewById(R.id.board),(LinearLayout)findViewById(R.id.hand));
+        drawButton.id((LinearLayout)findViewById(R.id.drawPile),(LinearLayout)findViewById(R.id.hand));
         draw.setOnClickListener(drawButton);
     }
 }

@@ -75,7 +75,7 @@ public final class MyDragListener implements View.OnDragListener {
                 Character dragMonth = dragID.charAt(0);
                 Character dropMonth = dropID.charAt(0);
                 int dragPoints = Integer.parseInt(String.valueOf(dragID.subSequence(1,3)));
-                int dropPoints = Integer.parseInt(String.valueOf(dragID.subSequence(1,3)));
+                int dropPoints = Integer.parseInt(String.valueOf(dropID.subSequence(1,3)));
 
                 //if you are not dropping in your own container
                 //and the suits are the same
@@ -86,6 +86,9 @@ public final class MyDragListener implements View.OnDragListener {
                     //add the view
                     tricks.addView(dragger);
                     tricks.addView(dropper);
+                    sco+=dropPoints;
+                    sco+=dragPoints;
+                    score.setText(sco+"");
                 }
                 break;
             case DragEvent.ACTION_DRAG_ENDED:

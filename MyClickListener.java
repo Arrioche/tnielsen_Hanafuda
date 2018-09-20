@@ -15,7 +15,7 @@ public class MyClickListener implements View.OnClickListener{
     public void onClick(View v) {
         View card;
         if(drawPile.getChildCount()!=0){
-            card= drawPile.getChildAt(0);
+            card= drawPile.getChildAt((int)(Math.random()*(drawPile.getChildCount()-1)));
             drawPile.removeView(card);
             hand.addView(card);
         }
